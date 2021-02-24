@@ -35,7 +35,7 @@ func NewTransport(url string, config *Config) (*Transport, error) {
 }
 
 // single accept listen for testing
-func newServer(url string, config *Config) (*Transport, io.Closer, error) {
+func NewServer(url string, config *Config) (*Transport, io.Closer, error) {
 	loggerFactory := config.LoggerFactory
 	if loggerFactory == nil {
 		loggerFactory = logging.NewDefaultLoggerFactory()
