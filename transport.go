@@ -7,7 +7,7 @@ import (
 	"io"
 
 	"github.com/pion/logging"
-	"github.com/sumeet-tiwari-samespace/internal/wrapper"
+	"github.com/sumeet-tiwari-samespace/quic/internal/wrapper"
 )
 
 // Transport is a quic transport focused on client/server use cases.
