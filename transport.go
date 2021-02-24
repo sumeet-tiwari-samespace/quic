@@ -35,29 +35,13 @@ func NewTransport(url string, config *Config) (*Transport, error) {
 }
 
 // NewServer accept listen for testing
-func NewServer(url string, config *Config) (*Transport, io.Closer, error) {
-	loggerFactory := config.LoggerFactory
-	if loggerFactory == nil {
-		loggerFactory = logging.NewDefaultLoggerFactory()
-	}
-
+func NewServer(url string, config *Config) (io.Closer, error) {
 	cfg := config.clone()
 	cfg.SkipVerify = true // Using self signed certificates for now
 
 	l, err := wrapper.Listen(url, cfg)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-
-	s, err := l.Accept()
-	if err != nil {
-		if cerr := l.Close(); cerr != nil {
-			err = fmt.Errorf("failed to close listener (%s) after accept failed: %w", cerr, err)
-		}
-		return nil, nil, err
-	}
-
-	t := &Transport{}
-	t.TransportBase.log = loggerFactory.NewLogger("quic")
-	return t, l, t.TransportBase.startBase(s)
+        return l, nil
 }
