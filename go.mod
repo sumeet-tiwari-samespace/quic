@@ -1,4 +1,4 @@
-module github.com/pion/quic
+module github.com/sumeet-tiwari-samespace/quic
 
 go 1.14
 
